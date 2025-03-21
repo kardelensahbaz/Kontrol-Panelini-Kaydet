@@ -29,8 +29,11 @@ export default function App() {
   })
 
   const [widgetConfig, setWidgetConfig] = useState(() => {
-    const savedConfig = localStorage.getItem("widgetConfig")
-    return savedConfig? JSON.parse(savedConfig) : DEFAULT_CONFIG;    
+    if (typeof window !== "undefined" && window.localStorage){
+      const savedConfig = localStorage.getItem("widgetConfig")
+      return savedConfig? JSON.parse(savedConfig) : DEFAULT_CONFIG;    
+    }
+   return DEFAULT_CONFIG
   })
   const [saveRequested, setSaveRequested] = useState(false)
 
